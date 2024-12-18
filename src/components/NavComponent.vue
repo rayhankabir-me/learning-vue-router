@@ -1,16 +1,16 @@
 <template>
-  <div class="home">
-    <h1>All Destinations</h1>
-    <div class="destinations">
+  <div id="nav">
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
       <router-link
         v-for="destination in destinations"
         :to="{ name: 'destination.show', params: { id: destination.id } }"
         :key="destination.id"
       >
-        <h2>{{ destination.name }}</h2>
-        <img :src="`/images/${destination.image}`" :alt="destination.name" />
+        {{ destination.name }}
       </router-link>
-    </div>
+    </nav>
   </div>
 </template>
 
