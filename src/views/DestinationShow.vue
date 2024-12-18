@@ -1,35 +1,18 @@
 <template>
-  <section class="destination">
+  <section v-if="destination" class="destination">
     <h1>{{ destination.name }}</h1>
     <div class="destination-details">
       <img :src="`/images/${destination.image}`" :alt="destination.name" />
       <p>{{ destination.description }}</p>
     </div>
   </section>
-
-  <section>
-    <div class="home">
-      <h1>All Destinations</h1>
-      <div class="destinations">
-        <router-link
-          v-for="destination in destinations"
-          :to="`/destination/${destination.id}`"
-          :key="destination.id"
-        >
-          <h2>{{ destination.name }}</h2>
-          <img :src="`/images/${destination.image}`" :alt="destination.name" />
-        </router-link>
-      </div>
-    </div>
-  </section>
 </template>
 
 <script>
-import sourceData from "@/data.json";
 export default {
   data() {
     return {
-      destinations: sourceData.destinations,
+      destination: null,
     };
   },
 
@@ -37,12 +20,21 @@ export default {
     destinationId() {
       return parseInt(this.$route.params.id);
     },
-
-    destination() {
-      return sourceData.destinations.find(
-        (destination) => destination.id === this.destinationId
+  },
+  methods: {
+    async initData() {
+      const response = await fetch(
+        `https://travel-dummy-api.netlify.app/${this.$route.params.slug}`
       );
+      this.destination = await response.json();
     },
+  },
+  async created() {
+    await this.initData();
+    this.$watch(
+      () => this.$route.params,
+      () => this.initData()
+    );
   },
 };
 </script>

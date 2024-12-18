@@ -5,7 +5,10 @@
       <RouterLink to="/about">About</RouterLink>
       <router-link
         v-for="destination in destinations"
-        :to="{ name: 'destination.show', params: { id: destination.id } }"
+        :to="{
+          name: 'destination.show',
+          params: { id: destination.id, slug: destination.slug },
+        }"
         :key="destination.id"
       >
         {{ destination.name }}
