@@ -1,17 +1,6 @@
 <template>
   <header>
-    <div id="nav">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <router-link
-          :to="destination.slug"
-          v-for="destination in destinations"
-          :key="destination.id"
-          >{{ destination.name }}</router-link
-        >
-      </nav>
-    </div>
+    <NavComponent />
   </header>
 
   <div class="container">
@@ -21,12 +10,11 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
-import sourceData from "@/data.json";
+import NavComponent from "@/components/NavComponent.vue";
+
 export default {
-  data() {
-    return {
-      destinations: sourceData.destinations,
-    };
+  components: {
+    NavComponent,
   },
 };
 </script>
