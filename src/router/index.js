@@ -1,7 +1,3 @@
-import Brazil from "@/views/Brazil.vue";
-import Hawaii from "@/views/Hawaii.vue";
-import Jamaica from "@/views/Jamaica.vue";
-import Panama from "@/views/Panama.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
@@ -24,22 +20,22 @@ const router = createRouter({
     {
       path: "/brazil",
       name: "brazil",
-      component: Brazil,
+      component: () => import("@/views/Brazil.vue"),
     },
     {
       path: "/hawaii",
       name: "hawaii",
-      component: Hawaii,
+      component: () => import("@/views/Hawaii.vue"),
     },
     {
       path: "/jamaica",
       name: "jamaica",
-      component: Jamaica,
+      component: () => import("@/views/Jamaica.vue"),
     },
     {
       path: "/panama",
       name: "panama",
-      component: Panama,
+      component: () => import("@/views/Panama.vue"),
     },
   ],
 });
